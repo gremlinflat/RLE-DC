@@ -3,18 +3,13 @@
 
 #include "src/utils/logger.h"
 
-#include "src/rle/rlev1.h"
-#include "src/rle/rlev2.h"
+#include "src/rlev1.h"
+#include "src/rlev2.h"
 
 int main() {
     std::string text;
     std::cout << "Enter text to encode: ";
     std::getline(std::cin, text);
-
-    // CHOOSE RLE_V1 OR RLE_V2 HERE
-    // RLE_V2 rle;
-    // std::string encoded = rle.encode(text);
-    // std::string decoded = rle.decode(encoded);
 
     std::string method;
     std::cout << "1. RLE_V1 (basic original RLE)" << std::endl;
