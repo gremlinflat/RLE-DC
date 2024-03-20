@@ -1,9 +1,8 @@
-/// logger
-
+#include "logger.h"
 #include <iostream>
 #include <string>
 
-void log(const std::string &message) {
+void Logger::log(const std::string &message) {
     // write text to the console with timestamp as prefix
 
     // get current time
