@@ -1,0 +1,25 @@
+Dictionary coder
+
+Article
+Talk
+Read
+Edit
+View history
+
+Tools
+From Wikipedia, the free encyclopedia
+
+This article needs additional citations for verification. Please help improve this article by adding citations to reliable sources. Unsourced material may be challenged and removed.
+Find sources: "Dictionary coder" – news · newspapers · books · scholar · JSTOR (June 2020) (Learn how and when to remove this template message)
+A dictionary coder, also sometimes known as a substitution coder, is a class of lossless data compression algorithms which operate by searching for matches between the text to be compressed and a set of strings contained in a data structure (called the 'dictionary') maintained by the encoder. When the encoder finds such a match, it substitutes a reference to the string's position in the data structure.
+
+Methods and applications
+Some dictionary coders use a 'static dictionary', one whose full set of strings is determined before coding begins and does not change during the coding process. This approach is most often used when the message or set of messages to be encoded is fixed and large; for instance, an application that stores the contents of a book in the limited storage space of a PDA generally builds a static dictionary from a concordance of the text and then uses that dictionary to compress the verses. This scheme of using Huffman coding to represent indices into a concordance has been called "Huffword".[1]
+
+In a related and more general method, a dictionary is built from redundancy extracted from a data environment (various input streams) which dictionary is then used statically to compress a further input stream. For example, a dictionary is built from old English texts then is used to compress a book.[2]
+
+More common are methods where the dictionary starts in some predetermined state but the contents change during the encoding process, based on the data that has already been encoded. Both the LZ77 and LZ78 algorithms work on this principle. In LZ77, a circular buffer called the "sliding window" holds the last N bytes of data processed. This window serves as the dictionary, effectively storing every substring that has appeared in the past N bytes as dictionary entries. Instead of a single index identifying a dictionary entry, two values are needed: the length, indicating the length of the matched text, and the offset (also called the distance), indicating that the match is found in the sliding window starting offset bytes before the current text.
+
+LZ78 uses a more explicit dictionary structure; at the beginning of the encoding process, the dictionary is empty. An index value of zero is used to represent the end of a string, so the first index of the dictionary is one. At each step of the encoding process, if there is no match, then the last matching index (or zero) and character are both added to the dictionary and output to the compressed stream. If there is a match, then the working index is updated to the matching index, and nothing is output.
+
+LZW is similar to LZ78, but, the dictionary is initialized to all possible symbols. The typical implementation works with 8 bit symbols, so the dictionary "codes" for hex 00 to hex FF (decimal 255) are pre-defined. Dictionary entries would be added starting with code value hex 100. Unlike LZ78, if a match is not found (or if the end of data), then only the dictionary code is output. This creates a potential issue since the decoder output is one step behind the dictionary. Refer to LZW for how this is handled. Enhancements to LZW include handing symbol sizes other than 8 bits and having reserved codes to reset the dictionary and to indicate end of data.

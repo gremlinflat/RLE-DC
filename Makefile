@@ -6,13 +6,14 @@ ENTRYPOINT = main.cpp
 BUILD_DIR = build
 
 SRC_DIR = src
-SRC = $(wildcard $(SRC_DIR)/*/*.cpp)
+SRC = $(wildcard $(SRC_DIR)/*.cpp)
+UTILS = $(wildcard $(SRC_DIR)/utils/*.cpp)
 
 .PHONY: all build run clean re
 
 build:
 	@mkdir -p $(BUILD_DIR)
-	$(COMPILER) $(CFLAGS) $(SRC) $(ENTRYPOINT) -o $(BUILD_DIR)/main
+	$(COMPILER) $(CFLAGS) $(SRC) $(UTILS) $(ENTRYPOINT) -o $(BUILD_DIR)/main
 
 run:
 	@./$(BUILD_DIR)/main
