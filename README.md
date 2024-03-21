@@ -90,7 +90,7 @@ The test data are various lenght, for this given time, we'll use 3 types of foll
 
 1. Randomly repeated chars on string (e.g. "aaaaabbbbbcccccdeffffggjiiikll")
 2. Full-text of wikipedia article to reflect the real-world data
-3. DNA Sequence (e.g. "ATCGATCGATCGATCG"; block of 4 characters)
+3. DNA Sequence (e.g. "GACC ATGT AAAA CATT TGTT ACAA GTCT "; block of 4 characters)
 
 ### Measurement
 
@@ -157,10 +157,10 @@ The performance of the RLE and Dictionary Coding algorithms will be measured und
 
 #### Scenario 3: DNA Sequence
 
-``Input: <fileplaceholder>``
+``Input:``[single DNA Sequence](https://github.com/gremlinflat/RLE-DC/blob/master/test/input_single_DNA.txt)
 
-- ``RLE Encoded: <fileplaceholder>``
-- ``SDC Encoded: <fileplaceholder>``
+- ``RLE Encoded:`` [RLE single DNA Result](https://github.com/gremlinflat/RLE-DC/blob/f2ec7a09485d874de67e2e154bf366ce62105e71/test/result/rle_dna_single.txt)
+- ``SDC Encoded:`` [SDC single DNA Result](https://github.com/gremlinflat/RLE-DC/blob/master/test/result/sdc_dna_single.txt)
 
 | Algorithm        | Compression Ratio  | Encoding Time  | Decoding Time  |
 |------------------|--------------------|----------------|----------------|
