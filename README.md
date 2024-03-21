@@ -169,11 +169,63 @@ The performance of the RLE and Dictionary Coding algorithms will be measured und
 
 ### Hipotesis & Conclusion
 
-... todo
+- RLE is better for the data that contains many runs of the same value or small differences between consecutive values. It's not suitable for the full-text data, but it's good for repeating sequence of data such as DNA Sequence.
+- Static Dictionary Coding is better for the full-text data, but it's not suitable for the repeating sequence of data such as DNA Sequence. It's also not suitable for the random repeating chars on string, because the dictionary is not optimized for this case.
+- The encoding & decoding time of the Static Dictionary Coding is significantly higher than the RLE (due to dictionary look up; this part is seems promising to deep dive into), but the compression ratio is better for the full-text data. It's not suitable for the random repeating chars on string, because the dictionary is not optimized for this case.
+- The compression ratio of the RLE is better for the random repeating chars on string, but it's not suitable for the full-text data. It's also not suitable for the DNA Sequence, because the data is not repeating sequence of data.
+- The compression ratio of the Static Dictionary Coding is better for the full-text data, but it's not suitable for the random repeating chars on string. It's also not suitable for the DNA Sequence, because the dictionary is not optimized for this case.
 
-## Improvesment
+#### Problem statement
 
-... todo
+- [RLE-I1] RLE is quite good for the repeating sequence of data even though it's not suitable for the full-text data. As the result, it's quite not good for unique sequence of data and high chance to increase the size of the data. e.g. ```abcdeffg``` will be encoded into ```1a1b1c1d1e2f1g``` which is larger than the original data.
+- [DC-I1] Static Dictionary Coding is quite good for the full-text data even though it's not suitable for the repeating sequence of data. As the result, even though all the data is unique, it's still able to compress the data but the compression ratio is not increasing significantly. e.g. ```abcdeffg``` will be encoded into ```abcdeffg``` which is the same size as the original data. ```as a foot note, the dictionary is still increasing the data size, so the dictionary itself is an overhead for real world implementation```
+
+## Improvesment Effort
+
+- [RLE-I1] To solve this problem, My no-brainer solution is to remove a counter if the counter is 1. e.g. ```abcdeffg``` will be encoded into ```abcde2f1g``` which is smaller than the original data. This is a good start to improve the compression ratio of the RLE algorithm. The trade-off is the encoding time will be increased because we need to check the counter for each token. Therefore, I've implemented it on RLEV2 (an improved version of RLE).
+- [DC-I1] One of my solution is to make the algorithm learn the data and create the dictionary based on the data. Theres a lot of algorithm to do this, but for this given time, I'll use the simple one. which is by counting each frequency of the token and create the dictionary based on the threshold. e.g. given the dataset is ```word1 word2 word3 word1 word2 word3 word3 word4``` then the frequency of the token is ```word1: 2, word2: 2, word3: 3, word4: 1```. then the threshold is 0.8, so we'll create the dictionary based on top 80% of the frequency. The dictionary will be ```{word3, word1, word2}```. The trade-off is that we need good amount of variation of the data to create the dictionary, but it's a good start to improve the compression ratio of the Static Dictionary Coding algorithm. Therefore, I've implemented it a method to generate the custom dynamic dictionary based on the data.
+
+### Result of the Improved Algorithm
+
+#### [RLE-I1] Improved RLE
+
+TLDR Goals: to remove an overhead of the counter if the counter is 1.
+
+``Input: "ABCBBBCJJKKYSBROLMAOFFFJKLKKKKXJSJXKSHXHJSHXHSXHSXSHXSHXSH"``
+
+- ``RLE Encoded: "1A1B1C3B1C2J2K1Y1S1B1R1O1L1M1A1O3F1J1K1L4K1X1J1S1J1X1K1S1H1X1H1J1S1H1X1H1S1X1H1S1X1S1H1X1S1H1X1S1H"``
+- ``RLEV2 Encoded: "ABC3BC2J2KYSBROLMAO3FJKL4KXJSJXKSHXHJSHXHSXHSXSHXSHXSH"``
+
+| Algorithm        | Compression Ratio  | Encoding Time  | Decoding Time  |
+|------------------|--------------------|----------------|----------------|
+| RLE              | 1.68                | 24417 ns       | 17042 ns        |
+| RLEV2            | 0.93                | 10250 ns       | 12875 ns        |
+
+#### [DC-I1] Dynamic Dictionary Coding
+
+TLDR Goals: to create the dictionary based on the similar data.
+
+```Input:``` [full-text wikipedia article 1](s)
+
+```Dataset for the dictionary:``` [full-text wikipedia article 2](s)
+
+- ``Static DC Encoded:`` [Static DC wiki result](s)
+- ``Dynamic DC Encoded (threshold: 0.8):`` [Dynamic DC (0.8) wiki result](s)
+- ``Dynamic DC Encoded (threshold: 0.6):`` [Dynamic DC (0.6) wiki result](s)
+
+| Algorithm        | Compression Ratio  | Encoding Time  | Decoding Time  | Learning Time | Dictionary Size | Dictionary |
+|------------------|--------------------|----------------|----------------|----------------|-----------------| -----------|
+| Static DC        | 1.09                | 3582884917 ns        | 3168250 ns        | - | 3.864.812 bytes  | [English_Alpha](links) |
+| Dynamic DC (0.8) | 0.85                | 3704417 ns        | 3916500 ns        | 904250 ns | 2.433 bytes | [wiki2_08](links) |
+| Dynamic DC (0.6) | 0.86                | 5895000 ns        | 6969792 ns        | 2729125 ns | 6 | [wiki2_06](links) |
+
+## Conclusion
+
+We've improved the RLE algorithm by removing the overhead of the counter if the counter is 1. The result is quite promising, the compression ratio is increased significantly and the encoding time is decreased. The trade-off is the encoding time is increased because we need to check the counter for each token.
+
+Also, we've improved the Static Dictionary Coding algorithm by creating the dictionary based on the similar data. The result is quite promising, the compression ratio is increased significantly and the encoding time is decreased. The trade-off is the encoding time is increased because we need to learn the data and create the dictionary based on the data.
+
+However, Compression Algorithm is highly contextual and depends on the data. Theres no silver bullet for the data compression algorithm. The performance of the algorithm is highly dependent on the data. Therefore, we need to understand the data and choose the right algorithm for the data.
 
 ## Known Issues
 
