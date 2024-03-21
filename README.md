@@ -123,26 +123,49 @@ The performance of the RLE and Dictionary Coding algorithms will be measured und
 
 ``Input: "AAAAABBBBBCCCCCDDDDDACCXVXXXTTTTUAAUVVVVVWWWWWXXXXXYYYYYZZZZZ"``
 
+- ``RLE Encoded: "5A5B5C5D1A2C1X1V3X4T1U2A1U5V5W5X5Y5Z"``
+- ``SDC Encoded: "AAAAABBBBBCCCCCDDDDDACCXVXXXTTTTUAAUVVVVVWWWWWXXXXXYYYYYZZZZZ"``
+
 | Algorithm        | Compression Ratio  | Encoding Time  | Decoding Time  |
 |------------------|--------------------|----------------|----------------|
-| RLE              | x                | x        | x        |
-| Static Dictionary| x                | x        | x        |
+| RLE              | 0.59               | 6667 ns       | 3208 ns        |
+| Static Dictionary| 1.01                | 17699208 ns        | 192625 ns        |
 
-#### Scenario 2: Full article from wikipedia
+``Input: "ABCBBBCJJKKYSBROLMAOFFFJKLKKKKXJSJXKSHXHJSHXHSXHSXSHXSHXSH"``
+
+- ``RLE Encoded: "1A1B1C3B1C2J2K1Y1S1B1R1O1L1M1A1O3F1J1K1L4K1X1J1S1J1X1K1S1H1X1H1J1S1H1X1H1S1X1H1S1X1S1H1X1S1H1X1S1H"``
+- ``SDC Encoded: "ABCBBBCJJKKYSBROLMAOFFFJKLKKKKXJSJXKSHXHJSHXHSXHSXSHXSHXSH"``
+
+| Algorithm        | Compression Ratio  | Encoding Time  | Decoding Time  |
+|------------------|--------------------|----------------|----------------|
+| RLE              | 1.68                | 24417 ns       | 17042 ns        |
+| Static Dictionary| 1.01                | 17737583 ns        | 213583 ns        |
+
+```footnotes: for static dictionary, the dictionary is static and contain the most common words in english language. It's not optimized for this case, but it's a good start to measure the performance of the algorithm.```
+
+#### Scenario 2: Full sentence
 
 ``Input: "the man who sold the world said ooooh child things are gonna get easier"``
+
+- ``RLE Encoded: "1t1h1e1 1m1a1n1 1w1h1o1 1s1o1l1d1 1t1h1e1 1w1o1r1l1d1 1s1a1i1d1 4o1h1 1c1h1i1l1d1 1t1h1i1n1g1s1 1a1r1e1 1g1o2n1a1 1g1e1t1 1e1a1s1i1e1r1"``
+- ``SDC Encoded: "320693 178863 365280 296539 320693 367568 276752 ooooh 54286 321887 19298 127801 124420 94903"``
+
 | Algorithm        | Compression Ratio  | Encoding Time  | Decoding Time  |
 |------------------|--------------------|----------------|----------------|
-| RLE              | x                | x        | x        |
-| Static Dictionary| x                | x        | x        |
+| RLE              | 1.88                | 32542 ns        | 18291 ns        |
+| Static Dictionary| 1.32                | 92662459 ns        | 129208 ns        |
 
 #### Scenario 3: DNA Sequence
 
-``Input: "AGCGGCGCGSG"``
+``Input: <fileplaceholder>``
+
+- ``RLE Encoded: <fileplaceholder>``
+- ``SDC Encoded: <fileplaceholder>``
+
 | Algorithm        | Compression Ratio  | Encoding Time  | Decoding Time  |
 |------------------|--------------------|----------------|----------------|
-| RLE              | x                | x        | x        |
-| Static Dictionary| x                | x        | x        |
+| RLE              | 1.71                | 285459 ns        | 212083 ns        |
+| Static Dictionary| 0.71                | 1923334 ns        | 102334 ns        |
 
 ### Hipotesis & Conclusion
 
