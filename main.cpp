@@ -81,8 +81,27 @@ void rlev1() {
     Logger logger;
     std::string input;
     logger.log("RLE_V1 - Basic original RLE");
-    std::cout << "Enter text to encode: ";
-    std::getline(std::cin, input);
+
+    std::string choice;
+    std::cout << "---------------------------------"
+              << std::endl;
+    std::cout << "1. Raw text (interactive)" << std::endl;
+    std::cout << "2. Text from file" << std::endl;
+    std::cout << "Enter choice [1-2]: ";
+    std::getline(std::cin, choice);
+
+    if (choice == "1") {
+        std::cout << "Enter text to encode: ";
+        std::getline(std::cin, input);
+    } else if (choice == "2") {
+        std::cout << "Enter file name: ";
+        std::string filename;
+        std::getline(std::cin, filename);
+        input = readTextFileIntoSingleString(filename);
+    } else {
+        std::cout << "Invalid choice" << std::endl;
+        return;
+    }
 
     // get current time for benchmarking
     auto start = std::chrono::high_resolution_clock::now();
@@ -115,8 +134,27 @@ void rlev2() {
     Logger logger;
     std::string input;
     logger.log("RLE_V2 - Improved RLE");
-    std::cout << "Enter text to encode: ";
-    std::getline(std::cin, input);
+
+    std::string choice;
+    std::cout << "---------------------------------"
+              << std::endl;
+    std::cout << "1. Raw text (interactive)" << std::endl;
+    std::cout << "2. Text from file" << std::endl;
+    std::cout << "Enter choice [1-2]: ";
+    std::getline(std::cin, choice);
+
+    if (choice == "1") {
+        std::cout << "Enter text to encode: ";
+        std::getline(std::cin, input);
+    } else if (choice == "2") {
+        std::cout << "Enter file name: ";
+        std::string filename;
+        std::getline(std::cin, filename);
+        input = readTextFileIntoSingleString(filename);
+    } else {
+        std::cout << "Invalid choice" << std::endl;
+        return;
+    }
 
     // get current time for benchmarking
     auto start = std::chrono::high_resolution_clock::now();
