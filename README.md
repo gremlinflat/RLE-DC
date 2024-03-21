@@ -219,7 +219,7 @@ TLDR Goals: to create the dictionary based on the similar data.
 |------------------|--------------------|----------------|----------------|----------------|-----------------| -----------|
 | Static DC        | 1.09                | 3582884917 ns        | 3168250 ns        | - | 3.864.812 bytes  | [English_Alpha](https://github.com/gremlinflat/RLE-DC/blob/master/test/english_dictionary_alpha.txt) |
 | Dynamic DC (0.8) | 0.85                | 3704417 ns        | 3916500 ns        | 904250 ns | 2.433 bytes | [wiki2_08](https://github.com/gremlinflat/RLE-DC/blob/master/test/result/dict/wiki08.txt) |
-| Dynamic DC (0.6) | 0.86                | 5895000 ns        | 6969792 ns        | 2729125 ns | 6 | [wiki2_06](https://github.com/gremlinflat/RLE-DC/blob/master/test/result/dict/wiki06.txt) |
+| Dynamic DC (0.6) | 0.86                | 5895000 ns        | 6969792 ns        | 2729125 ns | 1.726 bytes | [wiki2_06](https://github.com/gremlinflat/RLE-DC/blob/master/test/result/dict/wiki06.txt) |
 
 ## Conclusion
 
