@@ -88,9 +88,9 @@ Breakdown of the Static Dictionary Coding algorithm:
 
 The test data are various lenght, for this given time, we'll use 3 types of following data:
 
-1. Randomly repeated chars on string (e.g. "aaaaabbbbbcccccdeffffggjiiikll")
+1. Randomly repeated chars on string (e.g. ```aaaaabbbbbcccccdeffffggjiiikll```)
 2. Full-text of wikipedia article to reflect the real-world data
-3. DNA Sequence (e.g. "GACC ATGT AAAA CATT TGTT ACAA GTCT "; block of 4 characters)
+3. DNA Sequence (e.g. ```GACC ATGT AAAA CATT TGTT ACAA GTCT```; block of 4 characters)
 
 ### Measurement
 
@@ -146,6 +146,7 @@ The performance of the RLE and Dictionary Coding algorithms will be measured und
 #### Scenario 2: Full sentence
 
 ``Input: "the man who sold the world said ooooh child things are gonna get easier"``
+```Static Dictionary for DC:``` [English_Alpha](https://github.com/gremlinflat/RLE-DC/blob/master/test/english_dictionary_alpha.txt)
 
 - ``RLE Encoded: "1t1h1e1 1m1a1n1 1w1h1o1 1s1o1l1d1 1t1h1e1 1w1o1r1l1d1 1s1a1i1d1 4o1h1 1c1h1i1l1d1 1t1h1i1n1g1s1 1a1r1e1 1g1o2n1a1 1g1e1t1 1e1a1s1i1e1r1"``
 - ``SDC Encoded: "320693 178863 365280 296539 320693 367568 276752 ooooh 54286 321887 19298 127801 124420 94903"``
@@ -158,6 +159,7 @@ The performance of the RLE and Dictionary Coding algorithms will be measured und
 #### Scenario 3: DNA Sequence
 
 ``Input:``[single DNA Sequence](https://github.com/gremlinflat/RLE-DC/blob/master/test/input_single_DNA.txt)
+```Static Dictionary for DC:``` [DNA Combination (4 char chunks)](https://github.com/gremlinflat/RLE-DC/blob/master/test/dna_dictionary.txt)
 
 - ``RLE Encoded:`` [RLE single DNA Result](https://github.com/gremlinflat/RLE-DC/blob/f2ec7a09485d874de67e2e154bf366ce62105e71/test/result/rle_dna_single.txt)
 - ``SDC Encoded:`` [SDC single DNA Result](https://github.com/gremlinflat/RLE-DC/blob/master/test/result/sdc_dna_single.txt)
@@ -205,19 +207,19 @@ TLDR Goals: to remove an overhead of the counter if the counter is 1.
 
 TLDR Goals: to create the dictionary based on the similar data.
 
-```Input:``` [full-text wikipedia article 1](s)
+```Input:``` [full-text wikipedia article 1](https://github.com/gremlinflat/RLE-DC/blob/master/test/input_wiki.txt)
 
-```Dataset for the dictionary:``` [full-text wikipedia article 2](s)
+```Dataset for the dictionary:``` [full-text wikipedia article 2](https://github.com/gremlinflat/RLE-DC/blob/master/test/input_wiki2.txt)
 
-- ``Static DC Encoded:`` [Static DC wiki result](s)
-- ``Dynamic DC Encoded (threshold: 0.8):`` [Dynamic DC (0.8) wiki result](s)
-- ``Dynamic DC Encoded (threshold: 0.6):`` [Dynamic DC (0.6) wiki result](s)
+- ``Static DC Encoded:`` [Static DC wiki result](https://github.com/gremlinflat/RLE-DC/blob/master/test/result/sdc_wiki.txt)
+- ``Dynamic DC Encoded (threshold: 0.8):`` [Dynamic DC (0.8) wiki result](https://github.com/gremlinflat/RLE-DC/blob/master/test/result/ddc_wiki08.txt)
+- ``Dynamic DC Encoded (threshold: 0.6):`` [Dynamic DC (0.6) wiki result](https://github.com/gremlinflat/RLE-DC/blob/master/test/result/ddc_wiki06.txt)
 
 | Algorithm        | Compression Ratio  | Encoding Time  | Decoding Time  | Learning Time | Dictionary Size | Dictionary |
 |------------------|--------------------|----------------|----------------|----------------|-----------------| -----------|
-| Static DC        | 1.09                | 3582884917 ns        | 3168250 ns        | - | 3.864.812 bytes  | [English_Alpha](links) |
-| Dynamic DC (0.8) | 0.85                | 3704417 ns        | 3916500 ns        | 904250 ns | 2.433 bytes | [wiki2_08](links) |
-| Dynamic DC (0.6) | 0.86                | 5895000 ns        | 6969792 ns        | 2729125 ns | 6 | [wiki2_06](links) |
+| Static DC        | 1.09                | 3582884917 ns        | 3168250 ns        | - | 3.864.812 bytes  | [English_Alpha](https://github.com/gremlinflat/RLE-DC/blob/master/test/english_dictionary_alpha.txt) |
+| Dynamic DC (0.8) | 0.85                | 3704417 ns        | 3916500 ns        | 904250 ns | 2.433 bytes | [wiki2_08](https://github.com/gremlinflat/RLE-DC/blob/master/test/result/dict/wiki08.txt) |
+| Dynamic DC (0.6) | 0.86                | 5895000 ns        | 6969792 ns        | 2729125 ns | 6 | [wiki2_06](https://github.com/gremlinflat/RLE-DC/blob/master/test/result/dict/wiki06.txt) |
 
 ## Conclusion
 
